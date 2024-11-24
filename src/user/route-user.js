@@ -1,17 +1,35 @@
 import {Router} from "express"
+import {conn} from "../BDconnection.js"
 const route_user=Router()
 
-const users = []
+route_user.post("/cadastrar", (req,res) => {
+    const {nome, senha} = req.body
 
-route_user.post("/login", (req,res) => {
-
-    users.push(req.body)
-    res.send("Olá, Lucas")
-
+    conn.query(`insert into usuário (nome, senha) values 
+        ('${nome}', '${senha}')`, (err, result) => {
+        if (err) {
+        return res.json({
+            Erro: "Erro na inserção de dados, " + err.message
+        })
+       } 
+       res.json({
+        sucesso: `Usuário ${nome} cadastrado com sucesso!`
+       })
+    })
 })
 
-route_user.get("/login", (req,res) => {
-    res.json(users)
+route_user.get("/listar", (req,res) => {
+    conn.query("select * from usuário", (err, result) => {
+        if (err) {
+        return res.json({
+            Erro: "Erro na busca de dados, " + err.message
+        })
+        }
+        res.json(result)
+        result.map((item) => {
+            console.log(item.nome)
+        })
+    })
 })
 
 export{route_user}

@@ -1,6 +1,6 @@
 import express from "express"
-import { route_user } from "./user/route-user.js";
-import { conn } from "./BDconnection.js";
+import {route_user} from "./user/route-user.js";
+import {conn} from "./BDconnection.js";
 
 const app = express();
 app.use(express.json())
