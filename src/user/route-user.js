@@ -1,9 +1,17 @@
 import {Router} from "express"
 const route_user=Router()
 
-route_user.get("/user", (req,res) => {
-    console.log(req)
-    res.json("olá usuário")
+const users = []
+
+route_user.post("/login", (req,res) => {
+
+    users.push(req.body)
+    res.send("Olá, Lucas")
+
+})
+
+route_user.get("/login", (req,res) => {
+    res.json(users)
 })
 
 export{route_user}
