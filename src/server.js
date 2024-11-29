@@ -7,4 +7,4 @@ app.use(express.json())
 
 app.use(route_user)
 
-app.listen(3333, () => console.log("Servidor rodado"))
+app.listen(3333, () => console.log("Servidor rodando"))
